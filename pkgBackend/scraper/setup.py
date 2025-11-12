@@ -2,10 +2,9 @@ import logging
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
-
 from webdriver_manager.chrome import ChromeDriverManager
 
-class WebDriver:
+class Browser:
     def __init__(self, headless=True, disable_gpu=True, page_load_strategy="eager"):
         self._driver = None
         self._headless = headless

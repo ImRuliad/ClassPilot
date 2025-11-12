@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "beautifulsoup4>=4.14.2",
     "selenium>=4.38.0",
     "webdriver-manager>=4.0.1",
 ]

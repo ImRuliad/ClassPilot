@@ -30,6 +30,7 @@ def extract_hrefs_from_semester_link_elements(semester_link_elements):
         sem_urls.append(semester_url)
     return sem_urls
 
+#maybe add semester urls to a database..
 def get_semester_urls(webdriver: WebDriver, base_url: str):
     _navigate_to_base_url(webdriver, base_url)
     semester_link_elements = _fetch_semester_links(webdriver)
