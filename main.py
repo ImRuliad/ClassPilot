@@ -1,8 +1,8 @@
 import logging
 from pkgBackend.scraper.fetch_semester_urls import get_semester_urls
 from pkgBackend.scraper.fetch_major_urls import get_major_urls
+from pkgBackend.scraper.formatter import get_name_from_sem_url
 from pkgBackend.scraper.setup import Browser
-
 
 
 
@@ -15,7 +15,11 @@ if __name__ == "__main__":
     webdriver = Browser(headless=headless, page_load_strategy=page_load_strategy)
     driver = webdriver.create_webdriver()
     
-    semester_urls = get_semester_urls(driver, base_url)
-    if semester_urls:
-        major_urls = get_major_urls(driver, semester_urls[0])
-        print(major_urls)
+    #contains a list of semester url links
+    semester_urls: list [str] = get_semester_urls(driver, base_url)
+    
+    #contains a nested dictionary (key = semester name, value = {major: major url})
+    major_urls: dict[str, dict[str: str]] = { 
+        get_name_from_sem_url(sem_url): get_major_urls(driver, sem_url) 
+        for sem_url in semester_urls}
+    
