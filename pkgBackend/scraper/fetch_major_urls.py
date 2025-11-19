@@ -45,7 +45,7 @@ def _join_div_html_to_string(div_htmls) -> str:
     return html_string
 
 def _parse_major_url_from_html(html_string, semester_url) -> dict[str: str]:
-    offset = 15
+    offset = 27
     major_urls = {}
     try:
         soup = BeautifulSoup(html_string, "html.parser")
