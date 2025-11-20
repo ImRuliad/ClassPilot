@@ -23,7 +23,7 @@ def _get_soup(webdriver: WebDriver):
 
 def get_courses_data(webdriver, major_urls, semester_name):
     for major, url in major_urls.items():
-        logging.info(f"Fetching courses for {major} at {url}")
+        logging.info(f"\nFetching courses for {major} at {url}")
         _set_webdriver_url(webdriver, url)
         _wait_for_html_element(webdriver)
         soup = _get_soup(webdriver)

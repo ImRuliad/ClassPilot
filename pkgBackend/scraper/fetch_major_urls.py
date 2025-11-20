@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
+from urllib.parse import urljoin
 
 ANCHOR_TAG = "a"
 HREF_ELEMENT = "href"
@@ -45,14 +46,13 @@ def _join_div_html_to_string(div_htmls) -> str:
     return html_string
 
 def _parse_major_url_from_html(html_string, semester_url) -> dict[str: str]:
-    offset = 27
     major_urls = {}
     try:
         soup = BeautifulSoup(html_string, "html.parser")
         for item in soup.find_all(ANCHOR_TAG):
             major_name = item.text.strip()
-            major = item.get(HREF_ELEMENT)
-            major_url = semester_url + major[offset:]
+            relative_path = item.get(HREF_ELEMENT)
+            major_url = urljoin(semester_url, relative_path)
             major_urls[major_name] = major_url
         logging.info("Successfully parsed major urls from html elements")
         return major_urls
